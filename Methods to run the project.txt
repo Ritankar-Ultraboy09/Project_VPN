@@ -1,0 +1,36 @@
+OPEN 4 terminals on UBUNTU and dedicate each one for the under mentioned:-
+1. AES.h
+2. Server.c
+3.clientmain.c
+4 PacketCapture.c 
+
+1. Run the AES.h first , since it is the header file as it provides Advanced Encryption Standard for the encrypting and decrypting of the client and server.
+
+run the code:- `` gcc -o aes_encryption aes_test.c AES.c -lssl -lcrypto `` to compile
+and run:- 
+./aes_encryption
+
+2. Execute the Packet Capture file and run 
+``gcc -o packet_capture PacketCapture.c -lpcap`` to compile and 
+sudo ./packet_capture to execute. 
+it will send the 
+3. Run the server -
+code to compile- ``gcc -o server server.c AES.c -lssl -lcrypto``
+run - ``sudo ip addr add 10.0.0.1/24 dev lo``  assign the IP 10.0.0.1 to a virtual network interface
+``./server``
+
+4. Run the client
+``-gcc -o client clientmain.c AES.c -lssl -lcrypto`` to compile
+`sudo ip addr add 10.0.0.2/24 dev lo` -  assign the IP 10.0.0.2 to its virtual network interface
+
+./client
+
+5. Open another Ubuntu terminal and run 
+sudo tcpdump -i lo host 10.0.0.1 and 10.0.0.2 -w vpn_capture.pcap
+
+for capturing the flow between the server and client
+
+this demonstrates a simple VPN working. 
+
+
+
